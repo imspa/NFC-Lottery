@@ -1,0 +1,1 @@
+include ':NFCLottery', ':libraries:CardmeAndroid'

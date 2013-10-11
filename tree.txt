@@ -1,0 +1,171 @@
+.
+|-- gen
+|-- gradle
+|   `-- wrapper
+|-- libraries
+|   `-- CardmeAndroid
+|       |-- build
+|       |   |-- bundles
+|       |   |   |-- debug
+|       |   |   |   |-- assets
+|       |   |   |   `-- res
+|       |   |   `-- release
+|       |   |       |-- assets
+|       |   |       `-- res
+|       |   |-- classes
+|       |   |   |-- debug
+|       |   |   |   `-- net
+|       |   |   |       `-- sourceforge
+|       |   |   |           `-- cardme
+|       |   |   `-- release
+|       |   |       `-- net
+|       |   |           `-- sourceforge
+|       |   |               `-- cardme
+|       |   |-- dependency-cache
+|       |   |   |-- debug
+|       |   |   `-- release
+|       |   |-- incremental
+|       |   |   |-- aidl
+|       |   |   |   |-- debug
+|       |   |   |   `-- release
+|       |   |   |-- mergeAssets
+|       |   |   |   |-- debug
+|       |   |   |   `-- release
+|       |   |   |-- mergeResources
+|       |   |   |   |-- debug
+|       |   |   |   `-- release
+|       |   |   `-- packageResources
+|       |   |       |-- debug
+|       |   |       `-- release
+|       |   |-- libs
+|       |   |-- lint
+|       |   |-- res
+|       |   |   |-- all
+|       |   |   |   |-- debug
+|       |   |   |   `-- release
+|       |   |   `-- rs
+|       |   |       |-- debug
+|       |   |       `-- release
+|       |   |-- source
+|       |   |   |-- aidl
+|       |   |   |   |-- debug
+|       |   |   |   `-- release
+|       |   |   |-- buildConfig
+|       |   |   |   |-- debug
+|       |   |   |   |   `-- net
+|       |   |   |   |       `-- sourceforge
+|       |   |   |   |           `-- cardme
+|       |   |   |   `-- release
+|       |   |   |       `-- net
+|       |   |   |           `-- sourceforge
+|       |   |   |               `-- cardme
+|       |   |   |-- r
+|       |   |   |   |-- debug
+|       |   |   |   `-- release
+|       |   |   `-- rs
+|       |   |       |-- debug
+|       |   |       `-- release
+|       |   `-- tmp
+|       |       |-- packageDebugJar
+|       |       `-- packageReleaseJar
+|       |-- libs
+|       `-- src
+|           `-- main
+|               `-- src
+|                   `-- net
+|                       `-- sourceforge
+|                           `-- cardme
+|                               |-- db
+|                               |-- engine
+|                               |-- io
+|                               |-- util
+|                               `-- vcard
+|                                   |-- errors
+|                                   |-- features
+|                                   `-- types
+|                                       |-- media
+|                                       `-- parameters
+`-- NFCLottery
+    |-- build
+    |   |-- assets
+    |   |   `-- debug
+    |   |-- classes
+    |   |   `-- debug
+    |   |-- dependency-cache
+    |   |   `-- debug
+    |   |-- exploded-bundles
+    |   |   `-- NFCLotteryProjectLibrariesCardmeAndroidUnspecified.aar
+    |   |       |-- assets
+    |   |       `-- res
+    |   |-- incremental
+    |   |   |-- aidl
+    |   |   |   `-- debug
+    |   |   |-- mergeAssets
+    |   |   |   `-- debug
+    |   |   `-- mergeResources
+    |   |       `-- debug
+    |   |-- libs
+    |   |-- manifests
+    |   |   `-- debug
+    |   |-- res
+    |   |   |-- all
+    |   |   |   `-- debug
+    |   |   |       |-- drawable
+    |   |   |       |-- drawable-hdpi
+    |   |   |       |-- drawable-ldpi
+    |   |   |       |-- drawable-mdpi
+    |   |   |       |-- drawable-xhdpi
+    |   |   |       |-- drawable-xxhdpi
+    |   |   |       |-- layout
+    |   |   |       |-- layout-land
+    |   |   |       |-- menu
+    |   |   |       |-- raw
+    |   |   |       |-- values
+    |   |   |       |-- values-v11
+    |   |   |       `-- values-v14
+    |   |   `-- rs
+    |   |       `-- debug
+    |   |-- source
+    |   |   |-- aidl
+    |   |   |   `-- debug
+    |   |   |-- buildConfig
+    |   |   |   `-- debug
+    |   |   |       `-- it
+    |   |   |           `-- imwatch
+    |   |   |               `-- nfclottery
+    |   |   |-- r
+    |   |   |   `-- debug
+    |   |   |       `-- it
+    |   |   |           `-- imwatch
+    |   |   |               `-- nfclottery
+    |   |   `-- rs
+    |   |       `-- debug
+    |   `-- symbols
+    |       `-- debug
+    |-- libs
+    `-- src
+        `-- main
+            |-- java
+            |   `-- com
+            |       `-- test
+            |           `-- nfclottery
+            |               |-- data
+            |               |   `-- provider
+            |               |       `-- util
+            |               `-- dialogs
+            `-- res
+                |-- drawable
+                |-- drawable-hdpi
+                |-- drawable-ldpi
+                |-- drawable-mdpi
+                |-- drawable-xhdpi
+                |-- drawable-xxhdpi
+                |-- layout
+                |-- layout-land
+                |-- menu
+                |-- raw
+                |-- values
+                |-- values-v11
+                `-- values-v14
+
+168 directories

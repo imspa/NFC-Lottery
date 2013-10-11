@@ -1,0 +1,45 @@
+
+apply plugin: 'android'
+
+repositories {
+    mavenCentral()
+    //mavenLocal()    // Used for Crouton's v11 support library (not in Maven Central)
+}
+
+android {
+    compileSdkVersion 18
+    buildToolsVersion "18.1.0"
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 18
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:18.0.+'
+    compile 'com.android.support:appcompat-v7:18.0.+'
+    compile ('de.keyboardsurfer.android.widget:crouton:1.8.1') {
+        // Crouton uses an old version of the support library; this
+        // bypasses that version and builds it using the new one,
+        // which comes from the local SDK Gradle repositories
+        exclude module: 'support-v4'
+        compile 'com.android.support:support-v4:18.0.+'
+    }
+    compile project(':libraries:CardmeAndroid')
+    compile files('libs/opencsv-2.3.jar')
+    compile files('libs/dropbox-sync-sdk-android.jar')
+    compile files("$buildDir/native-libs/native-libs.jar")
+}
+
+task nativeLibsToJar(type: Zip) {
+    destinationDir file("$buildDir/native-libs")
+    baseName 'native-libs'
+    extension 'jar'
+    from fileTree(dir: 'libs', include: '**/*.so')
+    into 'lib/'
+}
+
+tasks.withType(Compile) {
+    compileTask -> compileTask.dependsOn(nativeLibsToJar)
+}

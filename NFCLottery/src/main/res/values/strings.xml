@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NFC Lottery</string>
+    <string name="action_clear_db">Clear DB</string>
+    <string name="action_draw">Draw a winner</string>
+    <string name="action_insert">Insert</string>
+    <string name="error_email_not_present">The tag doesn\'t contain any email address!</string>
+    <string name="dialog_clear_db_message">Are you sure? You will lose EVERYTHING!!1!</string>
+    <string name="dialog_clear_winners_message">Are you sure? You will delete all previous winners records! (note that you can remove single winners from the Last Winners list)</string>
+    <string name="hint_name">Your name</string>
+    <string name="hint_email">Your email</string>
+    <string name="hint_organization">Your company (optional)</string>
+    <string name="hint_title">Your job title (optional)</string>
+    <string name="dialog_insert_title">Insert new contact</string>
+    <string name="action_export">Export DB to CSV</string>
+    <string name="error_db_export">Error during DB export</string>
+    <string name="success_db_export">DB successfully exported to
+%s</string>
+    <string name="error_nfc_not_available">This device doesn\'t support NFC.</string>
+    <string name="error_nfc_off">NFC is disabled. Please enable it to scan tags</string>
+    <string name="hint_nfc_off">Please enable NFC</string>
+    <string name="hint_nfc_scan">Scan your NFC tag</string>
+    <string name="hint_nfc_not_available">NFC not available</string>
+    <string name="info_db_cleared">The database has been cleared</string>
+    <string name="error_email_already_present">Email address already in the database:\n%s</string>
+    <string name="error_email_not_valid">Email field not valid!</string>
+    <string name="error_emailinput_invalid">Not a valid email address</string>
+    <string name="error_emailinput_duplicate">Already in the database</string>
+    <string name="error_nameinput_invalid">Not a valid name</string>
+    <string name="action_winners">Last winners</string>
+    <string name="dialog_winners_title">Last winners</string>
+    <string name="winners_empty">Nobody has won anything yet…
+
+Tap here to draw a winner</string>
+    <string name="action_dropbox_link">Link to Dropbox</string>
+    <string name="action_dropbox_unlink">Unlink from Dropbox</string>
+
+    <plurals name="label_participants_count">
+        <item quantity="one">A brave hero entered the lottery!</item>
+        <item quantity="other">%d entered the lottery so far</item>
+    </plurals>
+    <string name="label_participants_empty">No one entered the lottery so far :(</string>
+    <string name="manual_insertion_header">Manual insertion</string>
+    <string name="manual_insertion_info">So, you don\'t have an NFC tag with your email? OK, let\'s go old-school. Type in!</string>
+    <string name="dialog_winners_delete_prompt">Do you want to revoke %s\'s victory?</string>
+    <string name="winner_label">The lucky winner is…</string>
+    <string name="action_dropbox_restore">Restore DB from Dropbox</string>
+    <string name="confirm_dropbox_restore">DB successfully restored</string>
+    <string name="dropbox_restore_failed">Restoring DB from Dropbox failed</string>
+    <string name="close">Close</string>
+    <string name="revoke">Revoke</string>
+    <string name="winner_tts_outro">Congratulations!</string>
+    <string name="action_clear_winners">Clear winners history</string>
+    <string name="info_winners_cleared">Winners history cleared</string>
+    <string name="dropbox_unavailable">Dropbox isn\'t available</string>
+    <string name="new_contact_added">Participant added:
+%s</string>
+    <string name="no_more_nonwinning_contacts">No more contacts to pick a winner from. Everyone has won!</string>
+    <string name="error_cant_draw">Can\'t draw a winner. Please retry</string>
+    <string name="insert_failed_wrong_parent">Cannot insert contact; wrong parent Activity</string>
+    <string name="clear_db_failed_wrong_parent">Cannot clear database; wrong parent Activity</string>
+    <string name="clear_winners_failed_wrong_parent">Cannot clear winners in database; wrong parent Activity</string>
+    <string name="error_no_tts">No English TTS support :(</string>
+    <string name="error_revoke_no_id">Unable to revoke victory, I\'ve lost the contact ID</string>
+    <string name="victory_revoked">Victory revoked</string>
+    <string name="error_revoke_db_err">Unable to write DB: victory NOT revoked!</string>
+    <string name="err_revoke_failed_toast">Unable to revoke victory for this guy</string>
+</resources>

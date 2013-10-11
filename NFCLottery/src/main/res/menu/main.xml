@@ -1,0 +1,48 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/action_clear_db"
+            android:title="@string/action_clear_db"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:orderInCategory="70"
+            android:showAsAction="never"
+            app:showAsAction="never"/>
+
+    <item
+            android:id="@+id/action_clear_winners"
+            android:title="@string/action_clear_winners"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:orderInCategory="72"
+            android:showAsAction="never"
+            app:showAsAction="never"/>
+
+    <item
+            android:id="@+id/action_export"
+            android:title="@string/action_export"
+            android:orderInCategory="75"
+            android:showAsAction="never"
+            app:showAsAction="never"/>
+
+    <item
+            android:id="@+id/action_winners"
+            android:title="@string/action_winners"
+            android:orderInCategory="77"
+            android:showAsAction="never"
+            app:showAsAction="never"/>
+    <item
+            android:id="@+id/action_draw"
+            android:title="@string/action_draw"
+            android:orderInCategory="80"
+            android:showAsAction="never"
+            app:showAsAction="never"/>
+
+    <item
+            android:id="@+id/action_insert"
+            android:title="@string/action_insert"
+            android:icon="@android:drawable/ic_menu_add"
+            android:orderInCategory="100"
+            android:showAsAction="always"
+            app:showAsAction="always"/>
+
+</menu>

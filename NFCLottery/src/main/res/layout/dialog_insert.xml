@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".MainActivity"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:background="#fff">
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/manual_insertion_header"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-thin"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="16dp"
+                android:background="#666"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/manual_insertion_info"
+                android:textAppearance="?android:textAppearanceMedium"/>
+
+        <EditText
+                android:id="@+id/txt_edit_name"
+                android:inputType="textCapWords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="@string/hint_name"
+                android:textColorHint="@color/text_hint"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:fontFamily="sans-serif-condensed"/>
+
+        <TextView
+                android:id="@+id/lbl_name_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:drawableLeft="@drawable/ic_invalid_email_glyph"
+                android:drawablePadding="8dp"
+                android:text="@string/error_nameinput_invalid"
+                android:textColor="#f55"
+                android:textStyle="italic"
+                android:textAppearance="?android:textAppearance"
+                android:fontFamily="sans-serif-light"
+                android:visibility="gone"/>
+
+        <EditText
+                android:id="@+id/txt_edit_email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="@string/hint_email"
+                android:textColorHint="@color/text_hint"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:fontFamily="sans-serif-condensed"/>
+
+        <TextView
+                android:id="@+id/lbl_email_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:drawableLeft="@drawable/ic_invalid_email_glyph"
+                android:drawablePadding="8dp"
+                android:textColor="#f55"
+                android:textStyle="italic"
+                android:textAppearance="?android:textAppearance"
+                android:fontFamily="sans-serif-light"
+                android:visibility="gone"
+                tools:text="@string/error_emailinput_invalid"/>
+
+        <EditText
+                android:id="@+id/txt_edit_organization"
+                android:inputType="none"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="@string/hint_organization"
+                android:textColorHint="@color/text_hint"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:fontFamily="sans-serif-condensed"/>
+
+        <EditText
+                android:id="@+id/txt_edit_title"
+                android:inputType="none"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="@string/hint_title"
+                android:textColorHint="@color/text_hint"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:fontFamily="sans-serif-condensed"/>
+
+    </LinearLayout>
+
+</ScrollView>

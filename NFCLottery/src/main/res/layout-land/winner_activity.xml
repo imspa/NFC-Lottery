@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+    <TextView
+            android:id="@+id/txt_winner_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/im_logo"
+            android:drawablePadding="50dp"
+            android:text="@string/winner_label"
+            android:textSize="36sp"
+            android:fontFamily="sans-serif-light"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:gravity="left|center_vertical"/>
+
+    <TextView
+            android:id="@+id/txt_winner_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/txt_winner_label"
+            android:layout_marginTop="40dp"
+            android:text="Winner name goes here"
+            android:textSize="55sp"
+            android:textColor="@color/text_winner"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:fontFamily="sans-serif-condensed"/>
+
+    <TextView
+            android:id="@+id/txt_winner_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/txt_winner_name"
+            android:layout_marginTop="15dp"
+            android:text="winner.email.goes@here.com"
+            android:textSize="35sp"
+            android:textColor="@color/text_secondary"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:fontFamily="sans-serif-condensed"/>
+
+</RelativeLayout>

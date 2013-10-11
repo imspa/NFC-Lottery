@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:padding="8dp">
+
+    <ImageView
+            android:id="@+id/img_achievement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_achievement"
+            tools:ignore="ContentDescription"/>
+
+    <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/img_achievement"
+            android:layout_alignBottom="@id/img_achievement"
+            android:layout_toRightOf="@id/img_achievement"
+            android:gravity="center_vertical|left"
+            android:fontFamily="sans-serif"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="marquee"/>
+
+    <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_name"
+            android:layout_alignLeft="@id/txt_name"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:textColor="@color/text_secondary"
+            android:maxLines="1"
+            android:ellipsize="marquee"/>
+
+</RelativeLayout>

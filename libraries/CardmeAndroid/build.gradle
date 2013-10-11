@@ -1,0 +1,21 @@
+
+apply plugin: 'android-library'
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 18
+    buildToolsVersion "18.1.0"
+
+    defaultConfig {
+        minSdkVersion 4
+        targetSdkVersion 18
+
+    }
+}
+
+dependencies {
+    compile 'commons-codec:commons-codec:1.5'
+}

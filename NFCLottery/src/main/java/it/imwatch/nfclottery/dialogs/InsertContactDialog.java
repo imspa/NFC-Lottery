@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -59,7 +60,7 @@ public class InsertContactDialog extends DialogFragment {
     private float mErrorAnimTranslateY;
 
     private TextView mEmailErrorTextView, mNameErrorTextView;
-    private int mNameErrorState, mEmailErrorState;
+    private int mNameErrorState = 1, mEmailErrorState = 1;
 
     private View.OnFocusChangeListener mFocusWatcher = new View.OnFocusChangeListener() {
         @Override
@@ -77,6 +78,8 @@ public class InsertContactDialog extends DialogFragment {
             }
         }
     };
+
+    private EditText mEmailEditText, mNameEditText, mOrganizationEditText, mTitleEditText;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -116,20 +119,19 @@ public class InsertContactDialog extends DialogFragment {
             }
         }
 
-        // Add the check for a valid email address
-        EditText editText = (EditText) rootView.findViewById(R.id.txt_edit_email);
-        editText.setOnFocusChangeListener(mFocusWatcher);
-        editText = (EditText) rootView.findViewById(R.id.txt_edit_name);
-        editText.setOnFocusChangeListener(mFocusWatcher);
+        mEmailEditText = (EditText) rootView.findViewById(R.id.txt_edit_email);
+        mNameEditText = (EditText) rootView.findViewById(R.id.txt_edit_name);
+        mOrganizationEditText = (EditText) rootView.findViewById(R.id.txt_edit_organization);
+        mTitleEditText = (EditText) rootView.findViewById(R.id.txt_edit_title);
+
+        // Add the check for a valid email address and names
+        mEmailEditText.setOnFocusChangeListener(mFocusWatcher);
+        mNameEditText.setOnFocusChangeListener(mFocusWatcher);
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(rootView)
-               .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
-                       checkAndInsert(rootView);
-                   }
-               })
+               .setPositiveButton(android.R.string.ok, null)
                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        final Dialog thisDialog = InsertContactDialog.this.getDialog();
@@ -143,9 +145,9 @@ public class InsertContactDialog extends DialogFragment {
                });
 
         // Create the AlertDialog object and return it
-        AlertDialog dialog = builder.create();
+        AlertDialog alertDialog = builder.create();
 
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
                 final AlertDialog alertDialog = (AlertDialog) dialog;
@@ -154,6 +156,7 @@ public class InsertContactDialog extends DialogFragment {
                 final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 if (button != null) {
                     button.setEnabled(false);
+                    button.setOnClickListener(new DontAutoCloseDialogListener(alertDialog));
                 }
                 else {
                     Log.w(TAG, "Can't get the dialog positive button.");
@@ -164,7 +167,7 @@ public class InsertContactDialog extends DialogFragment {
             }
         });
 
-        return dialog;
+        return alertDialog;
     }
 
     @Override
@@ -178,64 +181,66 @@ public class InsertContactDialog extends DialogFragment {
     /**
      * Check the data inserted into the form and it all the required fields are present,
      * then it adds the contact into DB
-     *
-     * @param rootView the current dialog root view
      */
-    private void checkAndInsert(View rootView) {
+    private boolean checkAndInsert() {
         final Activity activity = getActivity();
         if (activity == null) {
             Log.e(TAG, "Not attached to Activity: cannot insert contact in DB");
-            return;
+            return true;    // We can close, there's nothing to do anyway
         }
         String email = null;
         ArrayList<String> name = new ArrayList<String>(1), organization = new ArrayList<String>(1),
             title = new ArrayList<String>(1);
 
-        EditText editText = (EditText) rootView.findViewById(R.id.txt_edit_name);
-        if (editText != null && editText.getText() != null) {
-            name.add(editText.getText().toString());
+        if (mNameEditText != null && mNameEditText.getText() != null) {
+            name.add(mNameEditText.getText().toString());
         }
 
-        editText = (EditText) rootView.findViewById(R.id.txt_edit_email);
-        if (editText != null && editText.getText() != null) {
-            email = editText.getText().toString();
+        if (mEmailEditText != null && mEmailEditText.getText() != null) {
+            email = mEmailEditText.getText().toString();
         }
 
-        editText = (EditText) rootView.findViewById(R.id.txt_edit_organization);
-        if (editText != null && editText.getText() != null) {
-            organization.add(editText.getText().toString());
+        if (mOrganizationEditText != null && mOrganizationEditText.getText() != null &&
+            TextUtils.isGraphic(mOrganizationEditText.getText())) {
+
+            organization.add(mOrganizationEditText.getText().toString());
         }
 
-        editText = (EditText) rootView.findViewById(R.id.txt_edit_title);
-        if (editText != null && editText.getText() != null) {
-            title.add(editText.getText().toString());
+        if (mTitleEditText != null && mTitleEditText.getText() != null &&
+            TextUtils.isGraphic(mTitleEditText.getText())) {
+            title.add(mTitleEditText.getText().toString());
         }
 
         if (activity instanceof MainActivity) {
             final MainActivity mainActivity = (MainActivity) activity;
 
-            if (email == null || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (!isValidEmailAddress(email)) {
                 // Empty or invalid email field!
                 showEmailError(activity.getString(R.string.error_emailinput_invalid), 1);
-                return;
+                return false;
             }
 
             if (DataHelper.isEmailAlreadyPresent(mainActivity, email)) {
                 // We add each email only once
                 showEmailError(activity.getString(R.string.error_emailinput_duplicate), 2);
-                return;
+                return false;
             }
 
             if (DataHelper.insertContact(mainActivity, name, email, organization, title)) {
                 mainActivity.showCroutonNao(activity.getString(R.string.new_contact_added, email), Style.CONFIRM);
                 mainActivity.updateParticipantsCount();
+
+                return true;
             }
+
+            return false;
         }
         else {
             Log.e(TAG, "The parent Activity is not MainActivity! Wat is this I don't even");
             if (DEBUG) Log.d(TAG, "Activity class: " + activity.getLocalClassName());
             Toast.makeText(activity, activity.getString(R.string.insert_failed_wrong_parent), Toast.LENGTH_SHORT)
                  .show();
+            return true;    // We can close, there's nothing to do anyway
         }
     }
 
@@ -438,5 +443,28 @@ public class InsertContactDialog extends DialogFragment {
         fadeInSet.addAnimation(new TranslateAnimation(0f, 0f, -mErrorAnimTranslateY, 0f));
         fadeInSet.setDuration(300);
         mNameErrorTextView.startAnimation(fadeInSet);
+    }
+
+    private class DontAutoCloseDialogListener implements View.OnClickListener {
+
+        private final AlertDialog mDialog;
+
+        private DontAutoCloseDialogListener(AlertDialog dialog) {
+            mDialog = dialog;
+        }
+
+        @Override
+        public void onClick(View v) {
+            validateEmailInput(mEmailEditText.getText(), mDialog.getContext());
+            validateNameInput(mNameEditText.getText());
+
+            final Button button = mDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            if (button != null && button.isEnabled()) {
+                // Only proceed if the form is validated
+                if (checkAndInsert()) {
+                    mDialog.dismiss();
+                }
+            }
+        }
     }
 }

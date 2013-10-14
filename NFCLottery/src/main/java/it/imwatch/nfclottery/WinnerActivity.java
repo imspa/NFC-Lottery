@@ -60,9 +60,12 @@ public class WinnerActivity extends ActionBarActivity implements TextToSpeech.On
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                              WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.hide();
+        try {
+            // This could crash in the AppCompat package on Android 4+
+            final ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) actionBar.hide();
+        }
+        catch (Exception ignored) {}
 
         setContentView(R.layout.winner_activity);
 

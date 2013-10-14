@@ -17,14 +17,17 @@
 package it.imwatch.nfclottery;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -38,7 +41,7 @@ import java.util.Locale;
  * manifest, so this Activity can only be started from within
  * this app.
  */
-public class WinnerActivity extends Activity implements TextToSpeech.OnInitListener {
+public class WinnerActivity extends ActionBarActivity implements TextToSpeech.OnInitListener {
 
     public static final String EXTRA_WINNER_NAME = "winner_name";
     public static final String EXTRA_WINNER_EMAIL = "winner_email";
@@ -52,6 +55,14 @@ public class WinnerActivity extends Activity implements TextToSpeech.OnInitListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.hide();
 
         setContentView(R.layout.winner_activity);
 

@@ -73,6 +73,7 @@ public class MainActivity extends ActionBarActivity implements DropboxHelper.Dro
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String MIME_VCARD = "text/vcard";
     private static final String MIME_XVCARD = "text/x-vcard";
+    private static final String EXTRA_NO_NFC_CHECK_ERR = "no_nfc_check_err";
 
     private TextView mTxtStatus, mTxtNfcScan;
     private NfcAdapter mNfcAdapter;         // Late-initialized within isNfcAvailable()
@@ -129,10 +130,10 @@ public class MainActivity extends ActionBarActivity implements DropboxHelper.Dro
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         // Initialize the progress bar on the actionbar
         // Must be done BEFORE setContentView, then hidden
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         mTxtStatus = (TextView) findViewById(R.id.txt_status);
@@ -142,17 +143,23 @@ public class MainActivity extends ActionBarActivity implements DropboxHelper.Dro
 
         mHandler = new Handler();
 
-        if (!isNfcAvailable()) {
-            // isNfcAvailable() shows an error Toast by itself in case of need
-            return;
-        }
+        // Only show the error toast (when necessary) if the saved instance state
+        // doesn't tell us not to show it
+        final boolean showUi = savedInstanceState == null ||
+                               !savedInstanceState.getBoolean(EXTRA_NO_NFC_CHECK_ERR, false);
 
-        mTxtNfcScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS));
-            }
-        });
+        if (isNfcAvailable(showUi)) {
+            mTxtNfcScan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS));
+                }
+            });
+        }
+        else {
+            // isNfcAvailable() shows an error Toast by itself in case of need
+            Log.w(TAG, "This device doesn't support NFC");
+        }
 
         updateParticipantsCount();
         setShowsRefreshUi(false);
@@ -192,6 +199,18 @@ public class MainActivity extends ActionBarActivity implements DropboxHelper.Dro
      * @return Returns true if the NFC adapter is available, false otherwise
      */
     private boolean isNfcAvailable() {
+        return isNfcAvailable(true);
+    }
+
+    /**
+     * Determines if the NFC adapter is available on the device.
+     *
+     * @param showUi True to show some feedback to the user when needed, false
+     *               to avoid showing feedbacks
+     *
+     * @return Returns true if the NFC adapter is available, false otherwise
+     */
+    private boolean isNfcAvailable(boolean showUi) {
         if (mNfcAdapter == null) {
             // Try to retrieve the default NFC adapter (might not have been initialized yet)
             mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -199,9 +218,10 @@ public class MainActivity extends ActionBarActivity implements DropboxHelper.Dro
 
         if (mNfcAdapter == null) {
             // This means the device doesn't have NFC, and we don't support this: finish here
-            Toast.makeText(getApplicationContext(), getString(R.string.error_nfc_not_available), Toast.LENGTH_LONG)
-                 .show();
-            //finish();
+            if (showUi) {
+                Toast.makeText(this, getString(R.string.error_nfc_not_available), Toast.LENGTH_LONG)
+                     .show();
+            }
             return false;
         }
 
@@ -251,6 +271,12 @@ public class MainActivity extends ActionBarActivity implements DropboxHelper.Dro
     protected void onNewIntent(Intent intent) {
         // This method gets called when the user scans a Tag with the device
         handleIntent(intent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_NO_NFC_CHECK_ERR, true);
     }
 
     /**

@@ -15,7 +15,7 @@
 
     <uses-feature
             android:name="android.hardware.nfc"
-            android:required="true"/>
+            android:required="false"/>
 
     <application
             android:allowBackup="true"
@@ -47,7 +47,7 @@
                 android:exported="false"
                 android:screenOrientation="landscape"
                 android:configChanges="orientation|keyboardHidden"
-                android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"/>
+                android:theme="@style/Theme.AppCompat.Light"/>
 
         <provider
                 android:authorities="it.imwatch.nfclottery.provider.NFCMLProvider"

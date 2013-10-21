@@ -1,9 +1,7 @@
-
 apply plugin: 'android'
 
 repositories {
     mavenCentral()
-    //mavenLocal()    // Used for Crouton's v11 support library (not in Maven Central)
 }
 
 android {

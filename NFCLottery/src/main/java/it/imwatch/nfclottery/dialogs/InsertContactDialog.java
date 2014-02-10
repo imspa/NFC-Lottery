@@ -23,7 +23,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -79,7 +81,24 @@ public class InsertContactDialog extends DialogFragment {
         }
     };
 
-    private EditText mEmailEditText, mNameEditText, mOrganizationEditText, mTitleEditText;
+    private TextWatcher mEmailTypingWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            final CharSequence text = s.toString();
+            final Context context = InsertContactDialog.this.getActivity();
+            if (context != null) {
+                validateEmailInput(text, context);
+            }
+        }
+    };
+
+    private EditText mEmailEditText, mNameEditText, mOrganizationEditText, mTitleEditText;;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -127,6 +146,9 @@ public class InsertContactDialog extends DialogFragment {
         // Add the check for a valid email address and names
         mEmailEditText.setOnFocusChangeListener(mFocusWatcher);
         mNameEditText.setOnFocusChangeListener(mFocusWatcher);
+
+        // Add the check for a valid email during typing
+        mEmailEditText.addTextChangedListener(mEmailTypingWatcher);
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout

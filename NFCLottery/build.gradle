@@ -6,7 +6,7 @@ repositories {
 
 android {
     compileSdkVersion 18
-    buildToolsVersion "18.1.0"
+    buildToolsVersion "19.0.1"
 
     defaultConfig {
         minSdkVersion 10
@@ -41,8 +41,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:18.0.+'
-    compile 'com.android.support:appcompat-v7:18.0.+'
+    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:appcompat-v7:19.0.1'
     compile ('de.keyboardsurfer.android.widget:crouton:1.8.1') {
         // Crouton uses an old version of the support library; this
         // bypasses that version and builds it using the new one,

@@ -8,7 +8,7 @@
     <string name="error_email_not_present">The tag doesn\'t contain any email address!</string>
     <string name="dialog_clear_db_message">Are you sure? You will lose EVERYTHING!!1!</string>
     <string name="dialog_clear_winners_message">Are you sure? You will delete all previous winners records! (note that you can remove single winners from the Last Winners list)</string>
-    <string name="hint_name">Your name</string>
+    <string name="hint_name">Your name and surname</string>
     <string name="hint_email">Your email</string>
     <string name="hint_organization">Your company (optional)</string>
     <string name="hint_title">Your job title (optional)</string>
